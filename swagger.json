@@ -7,7 +7,7 @@
   },
   "host": "cse-341-project1-tegj.onrender.com",
   "basePath": "/",
-  "schemes": [ 
+  "schemes": [
     "https"
   ],
   "paths": {
@@ -23,7 +23,7 @@
           }
         }
       }
-    },
+    },    
     "/users/": {
       "get": {
         "tags": [
@@ -51,16 +51,19 @@
             "schema": {
               "type": "object",
               "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
                 "email": {
                   "example": "any"
                 },
-                "username": {
+                "favoriteColor": {
                   "example": "any"
                 },
-                "name": {
-                  "example": "any"
-                },
-                "ipaddress": {
+                "birthday": {
                   "example": "any"
                 }
               }
@@ -118,16 +121,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "userName": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
-                "name": {
+                "favoriteColor": {
                   "example": "any"
                 },
-                "ipaddress": {
+                "birthday": {
                   "example": "any"
                 }
               }
