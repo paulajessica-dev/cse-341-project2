@@ -1,8 +1,12 @@
 {
   "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "mongo": "^0.1.0"
+    "mongo": "^0.1.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
   },
   "name": "cse-341-project1",
   "version": "1.0.0",
@@ -22,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/paulajessica-dev/cse-341-project1/issues"
   },
-  "homepage": "https://github.com/paulajessica-dev/cse-341-project1#readme"
+  "homepage": "https://github.com/paulajessica-dev/cse-341-project1#readme",
+  "devDependencies": {
+    "eslint": "^9.35.0"
+  }
 }
