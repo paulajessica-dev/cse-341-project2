@@ -21,6 +21,11 @@ app.use((req,res,next) => {
 });
 app.use('/', require('./routes'));
 
+process.on('uncaughtException', (err, origin) => {
+  console.error('Unhandled exception:', err);
+  console.error('Origin:', origin);
+  process.exit(1); 
+});
 
 mongodb.iniDb((err) => {
     if (err){
