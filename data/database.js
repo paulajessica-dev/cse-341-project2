@@ -13,7 +13,7 @@ const iniDb = (callback) => {
         console.log('Db is already initialized!');
         return callback(null,database);
     }
-    MongoClient.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.idaqlfl.mongodb.net/project1?retryWrites=true&w=majority`)
+    MongoClient.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.idaqlfl.mongodb.net/project2?retryWrites=true&w=majority`)
         .then((client) => {
             database = client.db();
         callback(null,database);
