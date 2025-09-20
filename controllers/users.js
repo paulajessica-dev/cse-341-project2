@@ -5,16 +5,21 @@ const { ObjectId } = require('mongodb');
 
 const getAll = async(req,res) => {
     //#swagger.tags=['Users']
-    const result = await mongodb.getDatabase().collection('users').find();
-    result.toArray().then((users) => {
-        res.setHeader('Content-type', 'application/json');
-        res.status(200).json(users);
-    })
+    try {
+        const result = await mongodb.getDatabase().collection('users').find();
+        result.toArray().then((users) => {
+            res.setHeader('Content-type', 'application/json');
+            res.status(200).json(users);
+        })
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
 
 };
 
 const getSingle = async(req,res) => {
     //#swagger.tags=['Users']
+    try {
     if (!ObjectId.isValid(req.params.id)) {
         res.status(404).json('User not found.')
     };
@@ -23,8 +28,10 @@ const getSingle = async(req,res) => {
     result.toArray().then((users) => {
         res.setHeader('Content-type', 'application/json');
         res.status(200).json(users[0]);
-
     });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
 
 };
 
