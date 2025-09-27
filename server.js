@@ -4,29 +4,157 @@ const mongodb = require('./data/database');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-app.use(cors());
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const usersController = require('./controllers/users');
+const { addTokenToBlacklist } = require('./models/blacklist');
+const { isTokenBlacklisted } = require('./models/blacklist');
 
+
+// Practical flow:
+// User registers → /register → receives a token.
+// User logs in → /login → receives a new token.
+// User accesses protected routes → /profile → token is valid.
+// User logs out → /logout → token becomes invalid.
+// User tries to access a protected route again → /profile → receives 401 error → needs to log in again.
+
+
+app.use(cors());
+app.use(express.json());
 
 const port = 3001
-app.listen(process.env.port || port)
-app.use(bodyParser.json());
+const secret = process.env.SECRET_KEY
+
+//
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
         'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-type, Accept, Z-Key'
+        'Origin, X-Requested-With, Content-type, Accept, Z-Key, Authorization'
     );
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.setHeader(
+        'Access-Control-Allow-Methods', 
+        'GET,POST,PUT,DELETE,OPTIONS');
     next();
 });
-app.use('/', require('./routes'));
 
+app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']}));
+app.use(cors({ origin: '*'}));
+
+//register user route: add user if user doesn't exist
+app.post('/register', async (req, res) => {
+    try {
+        const { firstName, lastName, email, password, favoriteColor, birthday } = req.body;
+        
+        if (!firstName) return res.status(422).json({ message: 'First name is required!' });
+        if (!lastName) return res.status(422).json({ message: 'Last name is required!' });
+        if (!email) return res.status(422).json({ message: 'E-mail is required!' });
+        if (!password) return res.status(422).json({ message: 'Password is required!' });
+
+        const db = mongodb.getDatabase();
+       
+        let userExists = await db.collection('users').findOne({ email });
+
+        if (!userExists) {
+            user = await usersController.createUser({ firstName, lastName, email, password, favoriteColor, birthday });
+
+            return res.status(201).json({
+                message: 'User created successfully!',
+                user: {
+                    firstName: userExists.firstName,
+                    lastName: userExists.lastName,
+                    email: userExists.email                  
+                }
+            })
+
+        }else {
+            return res.status(409).json({ message: 'User already exists' })
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//login user route: verify email and password from user, if they matche and create token from him
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        
+        if (!email) return res.status(422).json({ message: 'E-mail is required!' });
+        if (!password) return res.status(422).json({ message: 'Password is required!' });
+
+        const db = mongodb.getDatabase();
+        
+        const userExists = await db.collection('users').findOne({ email });
+        if (!userExists) {
+            return res.status(401).json({ message: 'Invalid email' });
+        }
+        const passwordMatch = await bcrypt.compare(password, userExists.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }    
+        
+        const token = jwt.sign({ id: userExists._id }, secret, { expiresIn: '1h' });            
+        return res.status(200).json({
+            message: 'Authenticated successfully',
+            token,
+            user: {
+                firstName: userExists.firstName,
+                lastName: userExists.lastName,
+                email: userExists.email
+            }
+        });  
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//middleware authenticateToken - verify if token is valided or expired and, create tokenblacklist
+async function authenticateToken(req, res, next) {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });    
+    if (await isTokenBlacklisted(token)) {
+        return res.status(401).json({ message: 'Token is invalid. Please login again.' });
+    }
+    try {
+        const verified = jwt.verify(token, secret);
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(401).json({ message: 'Invalid or expired token' });
+    }
+}
+
+// private route to that user
+app.get('/userId/:id', authenticateToken, (req, res) => {
+    res.json({ message: 'Welcome to your profile!', user: req.user });
+});
+
+//logout user route: add user token in tokenBlacklist to that user can only login again with other token
+app.post('/logout', async (req, res) => {    try {
+        const token = req.headers['authorization']?.split(' ')[1];
+        if (!token) {
+            return res.status(400).json({ message: 'Token required for logout' });
+        }
+        await addTokenToBlacklist(token);
+        return res.status(200).json({ message: 'Logged out successfully, token blacklisted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+app.use('/', require('./routes'));
 process.on('uncaughtException', (err, origin) => {
   console.error('Unhandled exception:', err);
   console.error('Origin:', origin);
   process.exit(1); 
 });
 
+app.listen(process.env.port || port)
 mongodb.iniDb((err) => {
     if (err){
         console.log(err)

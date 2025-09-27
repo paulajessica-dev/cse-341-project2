@@ -27,7 +27,6 @@ const userValidations = [
       return true;
     }),
 
-
     body('email')
     .notEmpty().withMessage('Email is required')
     .isEmail().withMessage('Must be a valid email')
@@ -40,6 +39,11 @@ const userValidations = [
       }
       return true;
     }),
+
+    body('password')
+    .trim()
+    .isLength( { min: 8 })
+    .withMessage('Password must be minim 8 characters'),
 
     body('favoriteColor')
     .optional()

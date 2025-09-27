@@ -1,6 +1,6 @@
 const mongodb = require('../data/database');
-//const ObjectId = require('mongodb').ObjectId;
 const { ObjectId } = require('mongodb');
+const bcrypt = require('bcrypt');
 
 
 const getAll = async(req,res) => {
@@ -35,18 +35,22 @@ const getSingle = async(req,res) => {
 
 };
 
-const createUser = async(req,res) => {
-    
+const createUser = async(req,res) => {    
     //#swagger.tags=['Users']
     try {
-        const user = {            
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,    
-            email: req.body.email,
-            favoriteColor: req.body.favoriteColor,
-            birthday: req.body.birthday
+        const { firstName, lastName, email, favoriteColor, birthday, password } = req.body;
+        const salt = await bcrypt.genSalt(12);
+        const passwordHash = await bcrypt.hash(password, salt);
+        const user = {
+            firstName,
+            lastName,
+            email,
+            favoriteColor: favoriteColor || '',
+            birthday: birthday || null,
+            password: passwordHash
         };
-        const response = await mongodb.getDatabase().collection('users').insertOne(user);
+        const response = await mongodb.getDatabase().collection('users').insertOne(user);        
+
         if (response.acknowledged) {
             res.status(201).json({ 
                 message: 'User created successfully!',
@@ -62,6 +66,7 @@ const createUser = async(req,res) => {
 
 
 };
+
 
 const updateUser = async(req,res) => {
     //#swagger.tags=['Users']

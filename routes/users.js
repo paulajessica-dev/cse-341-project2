@@ -3,6 +3,7 @@ const usersController = require('../controllers/users.js');
 const userValidations = require('../middlewares/validate');
 const { validateRequest } = require('../helpers/validate');
 
+
 router.get('/', usersController.getAll);
 router.get('/:id', usersController.getSingle);
 router.post('/', userValidations,validateRequest,usersController.createUser);
