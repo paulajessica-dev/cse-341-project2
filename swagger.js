@@ -7,13 +7,12 @@ const doc = {
     },
     host: 'localhost:3001',
     schemes: ['https'],
-    components: {
-        securitySchemes: {
-            bearerAuth: {
-                type: 'http',
-                scheme: 'bearer',
-                bearerFormat: 'JWT'
-            }
+    securityDefinitions: {
+        bearerAuth: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+            description: 'Enter your token in the format **Bearer <token>**'
         }
     },
     security: [{ bearerAuth: [] }]

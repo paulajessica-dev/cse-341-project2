@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const usersController = require('./controllers/users');
 const { addTokenToBlacklist } = require('./models/blacklist');
-
+const swaggerRouter = require('./routes/swagger');
 
 
 // Practical flow:
@@ -62,9 +62,9 @@ app.post('/register', async (req, res) => {
             return res.status(201).json({
                 message: 'User created successfully!',
                 user: {
-                    firstName: userExists.firstName,
-                    lastName: userExists.lastName,
-                    email: userExists.email                  
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email                  
                 }
             })
 
@@ -126,7 +126,7 @@ app.post('/logout', async (req, res) => {    try {
     }
 });
 
-
+app.use(swaggerRouter);   
 app.use('/', require('./routes'));
 process.on('uncaughtException', (err, origin) => {
   console.error('Unhandled exception:', err);
@@ -134,13 +134,14 @@ process.on('uncaughtException', (err, origin) => {
   process.exit(1); 
 });
 
-app.listen(process.env.port || port)
 mongodb.iniDb((err) => {
     if (err){
-        console.log(err)
-    }
-    else{
-        console.log('Database is listening and node runing on port ' + (process.env.port || port));
+        console.log(err);
+    } else {
+        console.log('Database connected');
+        app.listen(process.env.PORT || port, () => {
+            console.log('Server running on port ' + (process.env.PORT || port));
+        });
     }
 });
 

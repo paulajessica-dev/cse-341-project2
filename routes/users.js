@@ -1,21 +1,23 @@
-var router = require('express').Router();
+const router = require('express').Router();
 const usersController = require('../controllers/users.js');
 const userValidations = require('../middlewares/validate');
 const { validateRequest } = require('../helpers/validate');
-const authenticateToken = require('../middlewares/authenticate'); 
+const authenticateToken = require('../middlewares/authenticate');
 
 /**
  * @swagger
  * /users/:
  *   get:
- *     summary: Get all users
  *     tags:
  *       - Users
+ *     description: Get all users
+ *     produces:
+ *       - application/json
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of all users
+ *         description: OK
  *       401:
  *         description: Unauthorized
  */
@@ -25,22 +27,25 @@ router.get('/', authenticateToken, usersController.getAll);
  * @swagger
  * /users/{id}:
  *   get:
- *     summary: Get a user by ID
  *     tags:
  *       - Users
+ *     description: Get a user by ID
+ *     produces:
+ *       - application/json
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         schema:
- *           type: string
+ *         type: string
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: User found
+ *         description: OK
  *       401:
  *         description: Unauthorized
+ *       404:
+ *         description: User not found
  */
 router.get('/:id', authenticateToken, usersController.getSingle);
 
@@ -48,62 +53,96 @@ router.get('/:id', authenticateToken, usersController.getSingle);
  * @swagger
  * /users/:
  *   post:
- *     summary: Create a new user
  *     tags:
  *       - Users
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               firstName:
- *                 type: string
- *               lastName:
- *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *               favoriteColor:
- *                 type: string
- *               birthday:
- *                 type: string
+ *     description: Create a new user
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: body
+ *         name: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             firstName:
+ *               type: string
+ *               example: John
+ *             lastName:
+ *               type: string
+ *               example: Doe
+ *             email:
+ *               type: string
+ *               example: john@example.com
+ *             password:
+ *               type: string
+ *               example: mysecretpassword
+ *             favoriteColor:
+ *               type: string
+ *               example: Blue
+ *             birthday:
+ *               type: string
+ *               example: 1990-01-01
  *     responses:
  *       201:
  *         description: User created successfully
- *       401:
- *         description: Unauthorized
+ *       409:
+ *         description: User already exists
+ *       500:
+ *         description: Internal server error
  */
-router.post('/', userValidations, validateRequest, usersController.createUser);
+router.post('/', authenticateToken, userValidations, validateRequest, usersController.createUser);
 
 /**
  * @swagger
  * /users/{id}:
  *   put:
- *     summary: Update a user by ID
  *     tags:
  *       - Users
+ *     description: Update a user by ID
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
+ *         type: string
+ *       - in: body
+ *         name: body
+ *         required: true
  *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
+ *           type: object
+ *           properties:
+ *             firstName:
+ *               type: string
+ *               example: John
+ *             lastName:
+ *               type: string
+ *               example: Doe
+ *             email:
+ *               type: string
+ *               example: john@example.com
+ *             favoriteColor:
+ *               type: string
+ *               example: Blue
+ *             birthday:
+ *               type: string
+ *               example: 1990-01-01
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
+ *       204:
  *         description: User updated successfully
- *       401:
- *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
  */
 router.put('/:id', authenticateToken, validateRequest, usersController.updateUser);
 
@@ -111,22 +150,25 @@ router.put('/:id', authenticateToken, validateRequest, usersController.updateUse
  * @swagger
  * /users/{id}:
  *   delete:
- *     summary: Delete a user by ID
  *     tags:
  *       - Users
+ *     description: Delete a user by ID
+ *     produces:
+ *       - application/json
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         schema:
- *           type: string
+ *         type: string
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
+ *       204:
  *         description: User deleted successfully
- *       401:
- *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
  */
 router.delete('/:id', authenticateToken, usersController.deleteUser);
 
