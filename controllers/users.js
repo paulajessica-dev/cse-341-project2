@@ -53,9 +53,12 @@ const createUser = async(req,res) => {
             password: passwordHash
         };
         const response = await mongodb.getDatabase().collection('users').insertOne(user);
+        
         const secret = process.env.SECRET_KEY; 
-
-        const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+        if (!secret) {
+            return res.status(500).json({ message: 'SECRET_KEY is not defined in environment variables' });
+        }
+        const token = jwt.sign({ id: response.insertedId }, secret, { expiresIn: '1h' });
              
 
         if (response.acknowledged) {
