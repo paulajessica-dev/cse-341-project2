@@ -6,7 +6,17 @@ const doc = {
         description: 'Users API'
     },
     host: 'localhost:3001',
-    schemes: ['https']
+    schemes: ['https'],
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT'
+            }
+        }
+    },
+    security: [{ bearerAuth: [] }]
 };
 
 const outputFile = './swagger.json';
