@@ -95,7 +95,7 @@ router.get('/:id', authenticateToken, usersController.getSingle);
  *       500:
  *         description: Internal server error
  */
-router.post('/', authenticateToken, userValidations, validateRequest, usersController.createUser);
+router.post('/', userValidations, validateRequest, usersController.createUser);
 
 /**
  * @swagger
