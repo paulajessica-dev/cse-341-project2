@@ -5,10 +5,6 @@ const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
-
-console.log('SECRET_KEY =', process.env.SECRET_KEY);
-
 const getAll = async(req,res) => {
     //#swagger.tags=['Users']
     try {

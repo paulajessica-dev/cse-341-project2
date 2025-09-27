@@ -4,6 +4,7 @@ const userValidations = require('../middlewares/validate');
 const { validateRequest } = require('../helpers/validate');
 const authenticateToken = require('../middlewares/authenticate');
 
+
 /**
  * @swagger
  * /users/:

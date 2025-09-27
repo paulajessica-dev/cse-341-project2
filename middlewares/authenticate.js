@@ -1,4 +1,5 @@
 //middleware authenticateToken - verify if token is valided or expired and, create tokenblacklist
+const { isTokenBlacklisted } = require('../models/blacklist');
 
 async function authenticateToken(req, res, next) {
     const token = req.headers['authorization']?.split(' ')[1];
