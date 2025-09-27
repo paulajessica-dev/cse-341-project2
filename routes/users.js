@@ -2,7 +2,7 @@ var router = require('express').Router();
 const usersController = require('../controllers/users.js');
 const userValidations = require('../middlewares/validate');
 const { validateRequest } = require('../helpers/validate');
-const authenticateToken = require('../middlewares/authenticateToken'); 
+const authenticateToken = require('../middlewares/authenticate'); 
 
 /**
  * @swagger
