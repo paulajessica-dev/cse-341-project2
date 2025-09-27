@@ -1,6 +1,9 @@
 const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 
 
 const getAll = async(req,res) => {
@@ -49,8 +52,11 @@ const createUser = async(req,res) => {
             birthday: birthday || null,
             password: passwordHash
         };
-        const response = await mongodb.getDatabase().collection('users').insertOne(user); 
-        const token = jwt.sign({ id: response.insertedId }, secret, { expiresIn: '1h' });       
+        const response = await mongodb.getDatabase().collection('users').insertOne(user);
+        const secret = process.env.SECRET_KEY; 
+
+        const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+             
 
         if (response.acknowledged) {
             res.status(201).json({ 

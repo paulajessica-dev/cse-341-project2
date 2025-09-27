@@ -58,16 +58,7 @@ app.post('/register', async (req, res) => {
 
         if (!userExists) {
             user = await usersController.createUser({ firstName, lastName, email, password, favoriteColor, birthday });
-
-            return res.status(201).json({
-                message: 'User created successfully!',
-                user: {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email                  
-                }
-            })
-
+            
         }else {
             return res.status(409).json({ message: 'User already exists' })
         }
