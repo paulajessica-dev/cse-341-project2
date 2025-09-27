@@ -49,12 +49,14 @@ const createUser = async(req,res) => {
             birthday: birthday || null,
             password: passwordHash
         };
-        const response = await mongodb.getDatabase().collection('users').insertOne(user);        
+        const response = await mongodb.getDatabase().collection('users').insertOne(user); 
+        const token = jwt.sign({ id: response.insertedId }, secret, { expiresIn: '1h' });       
 
         if (response.acknowledged) {
             res.status(201).json({ 
                 message: 'User created successfully!',
-                userId: response.insertedId
+                userId: response.insertedId,
+                token
             });
         } else {
             res.status(500).json(response.error || 'Some error occurred while updating the user.');
