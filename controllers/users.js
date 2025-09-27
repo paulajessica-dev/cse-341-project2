@@ -1,8 +1,10 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+
 
 
 
@@ -53,7 +55,6 @@ const createUser = async(req,res) => {
             password: passwordHash
         };
         const response = await mongodb.getDatabase().collection('users').insertOne(user);
-        
         const secret = process.env.SECRET_KEY; 
         if (!secret) {
             return res.status(500).json({ message: 'SECRET_KEY is not defined in environment variables' });
