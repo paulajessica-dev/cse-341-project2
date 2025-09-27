@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 
 
 
+console.log('SECRET_KEY =', process.env.SECRET_KEY);
 
 const getAll = async(req,res) => {
     //#swagger.tags=['Users']

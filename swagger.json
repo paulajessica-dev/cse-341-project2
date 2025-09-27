@@ -7,9 +7,7 @@
   },
   "host": "cse-341-project2-7v19.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
     "bearerAuth": {
       "type": "apiKey",
