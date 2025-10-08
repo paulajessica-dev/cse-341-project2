@@ -1,22 +1,10 @@
-const { isTokenBlacklisted } = require('../models/blacklist');
-const jwt = require('jsonwebtoken');
-const secret = process.env.SECRET_KEY;
-
-async function authenticateToken(req, res, next) {
-    const token = req.headers['authorization']?.split(' ')[1];
-    if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });    
-
-    if (await isTokenBlacklisted(token)) {
-        return res.status(401).json({ message: 'Token is invalid. Please login again.' });
+const isAuthenticated = (req,res, next) => {
+    if(req.session.user === undefined){
+        return res.status(401).json('You do not have access.')
     }
+    next();
+};
 
-    try {
-        const verified = jwt.verify(token, secret);
-        req.user = verified;
-        next();
-    } catch (err) {
-        res.status(401).json({ message: 'Invalid or expired token' });
-    }
+module.exports = {
+    isAuthenticated
 }
-
-module.exports = authenticateToken;
