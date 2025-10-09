@@ -19,16 +19,16 @@ app.use(bodyParser.json());
 
 app.set('trust proxy', 1);
 
-app.set('trust proxy', 1);
-
 app.use(session({
   secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: true, 
+    secure: process.env.NODE_ENV === 'production', // HTTPS somente
     httpOnly: true,
-    sameSite: 'none'
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
