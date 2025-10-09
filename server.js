@@ -22,6 +22,7 @@ app.use(session({
   secret: secret || 'defaultsecret',
   resave: false,
   saveUninitialized: true,
+  cookie: { secure: true }
 }));
 
 //passport
@@ -42,7 +43,7 @@ app.use((req,res,next) => {
 
 //cors
 app.use(cors({
-  origin: '*',
+  origin: 'https://cse-341-project2-7v19.onrender.com',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
