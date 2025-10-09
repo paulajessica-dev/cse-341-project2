@@ -53,10 +53,14 @@ const allowedOrigins = [
 
 //cors
 app.use(cors({
-  origin: ['https://cse-341-project2-7v19.onrender.com'],
-  credentials: true
+  origin: [
+    'https://cse-341-project2-7v19.onrender.com', 
+    'http://localhost:3001'
+  ],
+  methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 
 //routes
 app.use('/', swaggerRouter);
