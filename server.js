@@ -19,13 +19,30 @@ app.use(bodyParser.json());
 
 app.set('trust proxy', 1);
 
+const allowedOrigins = [  
+  'http://localhost:3001',
+  'https://cse-341-project2-7v19.onrender.com'
+];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('Not allowed by CORS'), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
+
+
 app.use(session({
   secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // HTTPS somente
+    secure: process.env.NODE_ENV === 'production', 
     httpOnly: true,
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 24 * 60 * 60 * 1000
@@ -48,21 +65,6 @@ app.use((req,res,next) => {
     next();
 });
 
-const allowedOrigins = [
-  'http://localhost:3001',
-  'https://cse-341-project2-7v19.onrender.com'
-];
-
-//cors
-app.use(cors({
-  origin: [
-    'https://cse-341-project2-7v19.onrender.com', 
-    'http://localhost:3001'
-  ],
-  methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
 //routes
 app.use('/', swaggerRouter);
