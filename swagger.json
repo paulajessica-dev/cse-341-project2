@@ -1,49 +1,31 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Users API",
-    "description": "Users API",
+    "title": "Users and Songs API",
+    "description": "API documentation for Users and Songs",
     "version": "1.0.0"
   },
   "host": "cse-341-project2-7v19.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/": {
       "get": {
-        "tags": [
-          "API Conneted!"
-        ],
-        "description": "",
+        "tags": ["API Connected!"],
+        "description": "Check API status",
         "responses": {
-          "200": {
-            "description": "OK"
-          }
+          "200": { "description": "OK" }
         }
       }
-    },    
+    },
     "/users/": {
       "get": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "tags": ["Users"],
+        "produces": ["application/json"],
+        "responses": { "200": { "description": "OK" } }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "body",
@@ -51,124 +33,132 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "email": { "example": "any" },
+                "favoriteColor": { "example": "any" },
+                "birthday": { "example": "any" },
+                "password": { "example": "any" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Created" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Users"],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "responses": { "200": { "description": "OK" } }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
+        "tags": ["Users"],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+                "firstName": { "example": "any" },
+                "lastName": { "example": "any" },
+                "email": { "example": "any" },
+                "favoriteColor": { "example": "any" },
+                "birthday": { "example": "any" },
+                "password": { "example": "any" }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "delete": {
-        "tags": [
-          "Users"
+        "tags": ["Users"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
-        "description": "",
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/songs/": {
+      "get": {
+        "tags": ["Songs"],
+        "produces": ["application/json"],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "tags": ["Songs"],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "example": "any" },
+                "artist": { "example": "any" },
+                "category": { "example": "any" }
+              }
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "201": { "description": "Created" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/songs/{id}": {
+      "get": {
+        "tags": ["Songs"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      },
+      "put": {
+        "tags": ["Songs"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "example": "any" },
+                "artist": { "example": "any" },
+                "category": { "example": "any" }
+              }
+            }
           }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Songs"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     }
