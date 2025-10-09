@@ -15,14 +15,19 @@ const secret = process.env.SECRET_KEY;
 
 //middlewares
 app.use(express.json());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.set('trust proxy', 1);
+app.use(session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true
+}));
 
 const allowedOrigins = [  
   'http://localhost:3001',
   'https://cse-341-project2-7v19.onrender.com'
 ];
+
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
@@ -37,38 +42,20 @@ app.use(cors({
 }));
 
 
-app.use(session({
-  secret: process.env.SECRET_KEY || 'defaultsecret',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production', 
-    httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    maxAge: 24 * 60 * 60 * 1000
-  }
-}));
-
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req,res,next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-type, Accept, Z-Key, Authorization'
-    );
-    res.setHeader(
-        'Access-Control-Allow-Methods', 
-        'GET,POST,PUT,DELETE,OPTIONS');
-    next();
-});
-
+app.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+      next();
+  })
 
 //routes
 app.use('/', swaggerRouter);
-app.use('/', require('./routes'));
+app.use('/', require('./routes/index'))
 app.use('/swagger.json', express.static('./swagger.json'));
 
 //gitHub strategy
