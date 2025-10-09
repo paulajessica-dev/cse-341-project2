@@ -22,7 +22,7 @@ app.use(session({
   secret: secret || 'defaultsecret',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: secret }
 }));
 
 //passport
