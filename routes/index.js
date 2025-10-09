@@ -15,7 +15,7 @@ router.get('/logout', (req, res, next) => {
 });
 
 //swagger
-router.use('/api-docs', require('./swagger')); // acesso: /api-docs
+router.use('/api-docs', require('./swagger')); 
 
 //home
 router.get('/', (req, res) => {

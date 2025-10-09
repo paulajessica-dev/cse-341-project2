@@ -75,7 +75,7 @@ app.get('/github/callback', passport.authenticate('github', {
 );
 
 app.use(swaggerRouter);   
-app.use('/', require('./routes'));
+app.use('/', require('./routes/index'));
 process.on('uncaughtException', (err, origin) => {
   console.error('Unhandled exception:', err);
   console.error('Origin:', origin);
