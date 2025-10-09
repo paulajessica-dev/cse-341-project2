@@ -1,24 +1,12 @@
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
-    info: {
-        title: 'Users API',
-        description: 'Users API'
-    },
+    info: { title: 'Users API', description: 'Users API' },
     host: 'localhost:3001',
     schemes: ['http'],
-    securityDefinitions: {
-        bearerAuth: {
-            type: 'apiKey',
-            name: 'Authorization',
-            in: 'header',
-            description: 'Enter your token in the format **Bearer <token>**'
-        }
-    },
-    security: [{ bearerAuth: [] }]
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/index.js'];
+const endpointsFiles = ['./routes/index.js', './routes/users.js', './routes/songs.js'];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
