@@ -17,14 +17,6 @@ const secret = process.env.SECRET_KEY;
 app.use(express.json());
 app.use(bodyParser.json());
 
-//cors
-app.use(cors({
-  origin: 'https://cse-341-project2-7v19.onrender.com',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
 //session before passport
 app.use(session({
   secret: secret || 'defaultsecret',
@@ -36,9 +28,30 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req,res,next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-type, Accept, Z-Key, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods', 
+        'GET,POST,PUT,DELETE,OPTIONS');
+    next();
+});
+
+//cors
+app.use(cors({
+  origin: '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 //routes
 app.use('/', swaggerRouter);
 app.use('/', require('./routes'));
+
 
 //gitHub strategy
 passport.use(new GitHubStrategy({
