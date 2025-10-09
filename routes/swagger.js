@@ -6,7 +6,7 @@ router.use(
   swaggerUi.serve,
   swaggerUi.setup(null, {
     swaggerOptions: {
-      url: '../swagger.json',
+      url: './swagger.json',
       withCredentials: true 
     }
   })
