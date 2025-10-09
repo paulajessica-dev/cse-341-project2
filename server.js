@@ -9,7 +9,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
-
+const swaggerRouter = require('./routes/swagger');
 app.use(cors());
 app.use(express.json());
 
@@ -44,6 +44,7 @@ app.use(cors({
   credentials: true,
   methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH']
 }));
+app.use('/', swaggerRouter);
 app.use('/', require('./routes'));
 
 passport.use(new GitHubStrategy({
