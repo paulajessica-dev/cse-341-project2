@@ -9,7 +9,6 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
-const swaggerRouter = require('./routes/swagger');
 
 app.use(cors());
 app.use(express.json());
@@ -36,7 +35,7 @@ app.use((req,res,next) => {
     );
     res.setHeader(
         'Access-Control-Allow-Methods', 
-        'GET,POST,PUT,DELETE,OPTIONS');
+        'GET,POST,PUT,PATCH, DELETE,OPTIONS');
     next();
 });
 
@@ -75,8 +74,6 @@ app.get('/github/callback', passport.authenticate('github', {
         res.redirect('/');
     }
 );
-
-app.use(swaggerRouter);  
 
 process.on('uncaughtException', (err, origin) => {
   console.error('Unhandled exception:', err);
