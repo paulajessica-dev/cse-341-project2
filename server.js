@@ -82,6 +82,7 @@ passport.deserializeUser((user, done) => done(null, user));
 
 app.get('/', (req, res) => {
   const user = req.session.user;
+  console.log('Sessão atual:', req.session);
   if (user) {
     res.send(`Logged in as ${user.displayName || user.username}`);
   } else {
