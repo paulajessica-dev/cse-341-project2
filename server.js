@@ -17,17 +17,13 @@ const secret = process.env.SECRET_KEY;
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.set('trust proxy', 1);
-
-//session before passport
 app.use(session({
   secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
   saveUninitialized: false,
   cookie: { 
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true, // impede acesso via JS
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+    secure: false,
+    httpOnly: true
   }
 }));
 
@@ -88,7 +84,7 @@ passport.deserializeUser((user, done) => done(null, user));
 
 app.get('/', (req, res) => {
   const user = req.session.user;
-  console.log('Sessão atual:', req.session);
+  //console.log('Sessão atual:', req.session);
   if (user) {
     res.send(`Logged in as ${user.displayName || user.username}`);
   } else {
