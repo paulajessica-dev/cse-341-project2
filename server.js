@@ -17,10 +17,16 @@ const secret = process.env.SECRET_KEY;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.set('trust proxy', 1); 
 app.use(session({
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: true
+  secret: secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', 
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax' 
+  }
 }));
 
 const allowedOrigins = [  
