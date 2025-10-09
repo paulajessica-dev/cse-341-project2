@@ -35,6 +35,12 @@ app.use((req,res,next) => {
     next();
 });
 
+app.use(session({
+  secret: secret || 'defaultsecret',
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use(cors({
   origin: '*', // https://cse-341-project2-7v19.onrender.com)
   credentials: true,
@@ -42,11 +48,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.use(session({
-  secret: secret || 'defaultsecret',
-  resave: false,
-  saveUninitialized: true,
-}));
 
 app.use(passport.initialize());
 app.use(passport.session());
