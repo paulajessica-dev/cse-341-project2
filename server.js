@@ -40,8 +40,11 @@ app.use((req,res,next) => {
     next();
 });
 
-app.use(cors({ methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']}));
-app.use(cors({ origin: '*'}));
+app.use(cors({
+  origin: '*',
+  credentials: true,
+  methods: ['GET','POST','PUT','DELETE','OPTIONS']
+}));
 
 app.use('/', require('./routes/index'));
 

@@ -6,7 +6,7 @@ const doc = {
         description: 'Users API'
     },
     host: 'localhost:3001',
-    schemes: ['https'],
+    schemes: ['http'],
     securityDefinitions: {
         bearerAuth: {
             type: 'apiKey',
