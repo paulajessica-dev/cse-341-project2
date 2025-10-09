@@ -35,14 +35,14 @@ app.use((req,res,next) => {
     );
     res.setHeader(
         'Access-Control-Allow-Methods', 
-        'GET,POST,PUT,PATCH, DELETE,OPTIONS');
+        'GET,POST,PUT,DELETE,OPTIONS, PATCH');
     next();
 });
 
 app.use(cors({
   origin: '*',
   credentials: true,
-  methods: ['GET','POST','PUT','DELETE','OPTIONS']
+  methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH']
 }));
 app.use('/', require('./routes/index'));
 
