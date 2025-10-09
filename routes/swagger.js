@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
-const { isAuthenticated } = require('../middlewares/authenticate');
 
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() || (req.session && req.session.user)) {
+  if (req.isAuthenticated() || req.session.user) {
     return next();
   }
   return res.status(403).send('You do not have access.');
@@ -13,7 +12,7 @@ function ensureAuthenticated(req, res, next) {
 
 
 router.get('/swagger.json', (req, res) => {
-  res.send(swaggerDocument);
+  res.json(swaggerDocument);
 });
 
 
@@ -26,7 +25,7 @@ router.use(
       url: '/swagger.json',
       withCredentials: true,
       requestInterceptor: (req) => {
-        req.withCredentials = true; 
+        req.withCredentials = true;
         return req;
       },
     },
