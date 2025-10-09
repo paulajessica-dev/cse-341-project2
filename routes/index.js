@@ -3,11 +3,13 @@ const router = require('express').Router();
 
 
 router.get('/', (req, res) => {  
-  res.send(req.session?.user
-    ? `Logged in as ${req.session.user.displayName || req.session.user.profile.username}`
-    : 'API Conectada - Logged Out');
+  if (req.session?.user) {
+    const { displayName, username } = req.session.user;
+    res.send(`Logged in as ${displayName || username}`);
+  } else {
+    res.send('API Conectada - Logged Out');
+  }
 });
-
 
 router.use('/users', require('./users'));
 router.use('/songs', require('./songs'));
