@@ -45,7 +45,6 @@ app.use(cors({
   credentials: true,
   methods: ['GET','POST','PUT','DELETE','OPTIONS']
 }));
-
 app.use('/', require('./routes/index'));
 
 passport.use(new GitHubStrategy({
@@ -67,10 +66,18 @@ passport.deserializeUser((user, done) => {
     done(null,user);
 });
 
+app.get('/', (req, res) => { res.send( req.session.user ===! undefined ? `Logged in as ${req.session.user.displayName || req.session.user.username}` : 'Logged Out')});
 
-app.use(swaggerRouter);   
-app.use('/', require('./routes/auth'));
-app.use('/', require('./routes/index'));
+app.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/api-docs', session: false}),
+    (req, res) => {
+        req.session.user = req.user;
+        res.redirect('/');
+    }
+);
+
+app.use(swaggerRouter);  
+
 process.on('uncaughtException', (err, origin) => {
   console.error('Unhandled exception:', err);
   console.error('Origin:', origin);
