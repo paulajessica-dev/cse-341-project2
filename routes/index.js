@@ -2,10 +2,9 @@ const passport = require('passport');
 const router = require('express').Router();
 
 
-router.get('/', (req, res) => {
-  
+router.get('/', (req, res) => {  
   res.send(req.session?.user
-    ? `Logged in as ${req.session.user.displayName}`
+    ? `Logged in as ${req.session.user.displayName || profile.username}`
     : 'API Conectada - Logged Out');
 });
 
