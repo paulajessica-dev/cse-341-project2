@@ -19,14 +19,16 @@ app.use(bodyParser.json());
 
 app.set('trust proxy', 1);
 
+app.set('trust proxy', 1);
+
 app.use(session({
   secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
   saveUninitialized: false,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production',
+  cookie: {
+    secure: true, 
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    sameSite: 'none'
   }
 }));
 
