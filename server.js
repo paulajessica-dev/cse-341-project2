@@ -17,12 +17,18 @@ const secret = process.env.SECRET_KEY;
 app.use(express.json());
 app.use(bodyParser.json());
 
+app.set('trust proxy', 1);
+
 //session before passport
 app.use(session({
   secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: false,
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true, // impede acesso via JS
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+  }
 }));
 
 //passport
