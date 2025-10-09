@@ -8,7 +8,7 @@ const doc = {
   },
   host: 'cse-341-project2-7v19.onrender.com',
   basePath: '/', 
-  schemes: ['http'],
+  schemes: ['https'],
   consumes: ['application/json'], 
   produces: ['application/json']
 };
