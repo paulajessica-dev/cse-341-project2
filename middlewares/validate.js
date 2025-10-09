@@ -38,11 +38,6 @@ const userValidations = [
       return true;
     }),
 
-  body('password')
-    .trim()
-    .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters'),
-
   body('favoriteColor')
     .optional()
     .isLength({ max: 30 })
