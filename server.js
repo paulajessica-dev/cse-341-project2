@@ -41,12 +41,25 @@ app.use((req,res,next) => {
     next();
 });
 
+const allowedOrigins = [
+  'http://localhost:3001',
+  'https://cse-341-project2-7v19.onrender.com'
+];
+
 //cors
 app.use(cors({
-  origin: 'https://cse-341-project2-7v19.onrender.com',
+  origin: function(origin, callback){
+    // permite requests sem origin (ex: Postman)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['GET','POST','PUT','DELETE','OPTIONS','PATCH'],
+  allowedHeaders: ['Content-Type','Authorization']
 }));
 
 //routes
