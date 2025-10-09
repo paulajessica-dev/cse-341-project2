@@ -6,7 +6,7 @@ const doc = {
     description: 'Users API documentation',
     version: '1.0.0'
   },
-  host: 'localhost:3001',
+  host: 'cse-341-project2-7v19.onrender.com',
   basePath: '/', 
   schemes: ['http'],
   consumes: ['application/json'], 
