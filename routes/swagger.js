@@ -14,7 +14,7 @@ router.use(
   swaggerUi.serve,
   swaggerUi.setup(null, {
     swaggerOptions: {
-      url: '/swagger.json' 
+      url: 'https://cse-341-project2-7v19.onrender.com/swagger.json'
     }
   })
 );
