@@ -71,7 +71,7 @@ app.use(cors({
 //routes
 app.use('/', swaggerRouter);
 app.use('/', require('./routes'));
-
+app.use('/swagger.json', express.static('./swagger.json'));
 
 //gitHub strategy
 passport.use(new GitHubStrategy({

@@ -1,19 +1,27 @@
 const router = require('express').Router();
 const swaggerUi = require('swagger-ui-express');
-const path = require('path');
+const swaggerDocument = require('../swagger.json');
 
+// Middleware para verificar se o usuário está logado
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated() || req.session.user) {
+    return next();
+  }
+  return res.status(403).send('You do not have access.');
+}
 
-router.get('/swagger.json', (req, res) => {
-  res.sendFile(path.join(__dirname, '../swagger.json'));
-});
-
-
+// 🔐 Protege a rota do Swagger
 router.use(
   '/api-docs',
+  ensureAuthenticated,
   swaggerUi.serve,
-  swaggerUi.setup(null, {
+  swaggerUi.setup(swaggerDocument, {
     swaggerOptions: {
-      url: '/swagger.json' 
+      withCredentials: true, // envia cookies da sessão
+      requestInterceptor: (req) => {
+        req.withCredentials = true;
+        return req;
+      }
     }
   })
 );
