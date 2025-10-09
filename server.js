@@ -19,10 +19,10 @@ app.use(bodyParser.json());
 
 //session before passport
 app.use(session({
-  secret: secret || 'defaultsecret',
+  secret: process.env.SECRET_KEY || 'defaultsecret',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: secret }
+  cookie: { secure: process.env.SECRET_KEY }
 }));
 
 //passport
