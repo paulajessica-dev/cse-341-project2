@@ -3,7 +3,7 @@
   "info": {
     "title": "Users and Songs API",
     "description": "API documentation for Users and Songs",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "host": "cse-341-project2-7v19.onrender.com",
   "basePath": "/",
