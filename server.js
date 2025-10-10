@@ -29,11 +29,6 @@ app.use(session({
   }
 }));
 
-app.use((req, res, next) => {
-  console.log('🔍 Sessão atual:', req.session);
-  next();
-});
-
 
 const allowedOrigins = [  
   'http://localhost:3001',
