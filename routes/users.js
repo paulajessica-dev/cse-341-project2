@@ -7,7 +7,7 @@ const { isAuthenticated } = require('../middlewares/authenticate');
 router.get('/', usersController.getAll);
 router.get('/:id', usersController.getSingle);
 router.post('/', isAuthenticated,userValidations, validateRequest, usersController.createUser);
-router.put('/:id', isAuthenticated, usersController.updateUser);
-router.delete('/:id', isAuthenticated,usersController.deleteUser);
+router.put('/:id', isAuthenticated, validateRequest, usersController.updateUser);
+router.delete('/:id', isAuthenticated,validateRequest, usersController.deleteUser);
 
 module.exports = router;
