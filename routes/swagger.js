@@ -1,7 +1,5 @@
-const router = require('express').Router();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
-
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated() || req.session.user) {
@@ -10,11 +8,9 @@ function ensureAuthenticated(req, res, next) {
   return res.status(403).send('You do not have access.');
 }
 
-
 router.get('/swagger.json', (req, res) => {
   res.json(swaggerDocument);
 });
-
 
 router.use(
   '/api-docs',
@@ -23,13 +19,11 @@ router.use(
   swaggerUi.setup(swaggerDocument, {
     swaggerOptions: {
       url: '/swagger.json',
-      withCredentials: true,
+      withCredentials: true, 
       requestInterceptor: (req) => {
-        req.withCredentials = true;
+        req.credentials = 'include'; 
         return req;
-      },
-    },
+      }
+    }
   })
 );
-
-module.exports = router;
