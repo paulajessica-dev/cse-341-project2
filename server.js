@@ -29,6 +29,12 @@ app.use(session({
   }
 }));
 
+app.use((req, res, next) => {
+  console.log('🔍 Sessão atual:', req.session);
+  next();
+});
+
+
 const allowedOrigins = [  
   'http://localhost:3001',
   'https://cse-341-project2-7v19.onrender.com'
@@ -81,12 +87,12 @@ app.get('/', (req, res) => {
   }
 });
 
-app.get('/github/callback',
-  passport.authenticate('github', { failureRedirect: '/api-docs' }),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
-  }
+app.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/api-docs', session: false}),
+    (req, res) => {
+        req.session.user = req.user;
+        res.redirect('/');
+    }
 );
 
 process.on('uncaughtException', (err, origin) => {
