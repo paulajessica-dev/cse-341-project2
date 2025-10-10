@@ -1,153 +1,272 @@
 [
-    {
-      "title": "Running Up That Hill (A Deal with God)",
-      "artist": "Kate Bush",
-      "category": "80s Pop"
-    },
-    {
-      "title": "Should I Stay or Should I Go",
-      "artist": "The Clash",
-      "category": "Punk Rock"
-    },
-    {
-      "title": "Every Breath You Take",
-      "artist": "The Police",
-      "category": "80s Rock"
-    },
-    {
-      "title": "Africa",
-      "artist": "Toto",
-      "category": "80s Pop Rock"
-    },
-    {
-      "title": "Material Girl",
-      "artist": "Madonna",
-      "category": "80s Pop"
-    },
-    {
-      "title": "Never Ending Story",
-      "artist": "Limahl",
-      "category": "80s Pop"
-    },
-    {
-      "title": "Time After Time",
-      "artist": "Cyndi Lauper",
-      "category": "80s Pop Ballad"
-    },
-    {
-      "title": "Ghostbusters",
-      "artist": "Ray Parker Jr.",
-      "category": "80s Soundtrack"
-    },
-    {
-      "title": "Whip It",
-      "artist": "Devo",
-      "category": "New Wave"
-    },
-    {
-      "title": "Heroes",
-      "artist": "David Bowie",
-      "category": "Classic Rock"
-    },
-    {
-      "title": "Atmosphere",
-      "artist": "Joy Division",
-      "category": "Post-Punk"
-    },
-    {
-      "title": "Rock You Like a Hurricane",
-      "artist": "Scorpions",
-      "category": "Hard Rock"
-    },
-    {
-      "title": "Shout",
-      "artist": "Tears for Fears",
-      "category": "80s Pop Rock"
-    },
-    {
-      "title": "White Rabbit",
-      "artist": "Jefferson Airplane",
-      "category": "Psychedelic Rock"
-    },
-    {
-      "title": "Waiting for a Girl Like You",
-      "artist": "Foreigner",
-      "category": "Soft Rock"
-    },
-    {
-      "title": "Love Is a Battlefield",
-      "artist": "Pat Benatar",
-      "category": "80s Rock"
-    },
-    {
-      "title": "Walk Like an Egyptian",
-      "artist": "The Bangles",
-      "category": "80s Pop"
-    },
-    {
-      "title": "Separate Ways (Worlds Apart)",
-      "artist": "Journey",
-      "category": "Arena Rock"
-    },
-    {
-      "title": "Cold As Ice",
-      "artist": "Foreigner",
-      "category": "Classic Rock"
-    },
-    {
-      "title": "Round and Round",
-      "artist": "Ratt",
-      "category": "Glam Metal"
-    },
-    {
-      "title": "Talking in Your Sleep",
-      "artist": "The Romantics",
-      "category": "New Wave"
-    },
-    {
-      "title": "Wake Me Up Before You Go-Go",
-      "artist": "Wham!",
-      "category": "80s Pop"
-    },
-    {
-      "title": "Dancing With Myself",
-      "artist": "Billy Idol",
-      "category": "New Wave Rock"
-    },
-    {
-      "title": "Twist of Fate",
-      "artist": "Olivia Newton-John",
-      "category": "80s Pop"
-    },
-    {
-      "title": "She's Got You",
-      "artist": "Patsy Cline",
-      "category": "Classic Ballad"
-    },
-    {
-      "title": "Object of My Desire",
-      "artist": "Starpoint",
-      "category": "Funk / R&B"
-    },
-    {
-      "title": "Obsession",
-      "artist": "Animotion",
-      "category": "Synthpop"
-    },
-    {
-      "title": "Kids in America",
-      "artist": "Kim Wilde",
-      "category": "80s Pop Rock"
-    },
-    {
-      "title": "You Spin Me Round (Like a Record)",
-      "artist": "Dead or Alive",
-      "category": "Hi-NRG / Dance"
-    },
-    {
-      "title": "Back to Life",
-      "artist": "Soul II Soul",
-      "category": "R&B / Soul"
-    }
+  {
+    "title": "Running Up That Hill (A Deal with God)",
+    "artist": "Kate Bush",
+    "category": "80s Pop",
+    "album": "Hounds of Love",
+    "release_year": 1985,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Emotional / Epic"
+  },
+  {
+    "title": "Should I Stay or Should I Go",
+    "artist": "The Clash",
+    "category": "Punk Rock",
+    "album": "Combat Rock",
+    "release_year": 1982,
+    "featured_in": "Stranger Things - Season 1",
+    "mood": "Rebellious / Energetic"
+  },
+  {
+    "title": "Every Breath You Take",
+    "artist": "The Police",
+    "category": "80s Rock",
+    "album": "Synchronicity",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 2",
+    "mood": "Melancholic / Romantic"
+  },
+  {
+    "title": "Africa",
+    "artist": "Toto",
+    "category": "80s Pop Rock",
+    "album": "Toto IV",
+    "release_year": 1982,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Uplifting / Nostalgic"
+  },
+  {
+    "title": "Material Girl",
+    "artist": "Madonna",
+    "category": "80s Pop",
+    "album": "Like a Virgin",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Playful / Confident"
+  },
+  {
+    "title": "Never Ending Story",
+    "artist": "Limahl",
+    "category": "80s Pop",
+    "album": "NeverEnding Story (Soundtrack)",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Dreamy / Whimsical"
+  },
+  {
+    "title": "Time After Time",
+    "artist": "Cyndi Lauper",
+    "category": "80s Pop Ballad",
+    "album": "She's So Unusual",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Sentimental / Soft"
+  },
+  {
+    "title": "Ghostbusters",
+    "artist": "Ray Parker Jr.",
+    "category": "80s Soundtrack",
+    "album": "Ghostbusters (Soundtrack)",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 2",
+    "mood": "Fun / Playful"
+  },
+  {
+    "title": "Whip It",
+    "artist": "Devo",
+    "category": "New Wave",
+    "album": "Freedom of Choice",
+    "release_year": 1980,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Quirky / Upbeat"
+  },
+  {
+    "title": "Heroes",
+    "artist": "David Bowie",
+    "category": "Classic Rock",
+    "album": "Heroes",
+    "release_year": 1977,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Inspirational / Reflective"
+  },
+  {
+    "title": "Atmosphere",
+    "artist": "Joy Division",
+    "category": "Post-Punk",
+    "album": "Substance",
+    "release_year": 1980,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Dark / Introspective"
+  },
+  {
+    "title": "Rock You Like a Hurricane",
+    "artist": "Scorpions",
+    "category": "Hard Rock",
+    "album": "Love at First Sting",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Energetic / Intense"
+  },
+  {
+    "title": "Shout",
+    "artist": "Tears for Fears",
+    "category": "80s Pop Rock",
+    "album": "Songs from the Big Chair",
+    "release_year": 1985,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Emotional / Anthemic"
+  },
+  {
+    "title": "White Rabbit",
+    "artist": "Jefferson Airplane",
+    "category": "Psychedelic Rock",
+    "album": "Surrealistic Pillow",
+    "release_year": 1967,
+    "featured_in": "Stranger Things - Season 1",
+    "mood": "Trippy / Dreamlike"
+  },
+  {
+    "title": "Waiting for a Girl Like You",
+    "artist": "Foreigner",
+    "category": "Soft Rock",
+    "album": "4",
+    "release_year": 1981,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Romantic / Smooth"
+  },
+  {
+    "title": "Love Is a Battlefield",
+    "artist": "Pat Benatar",
+    "category": "80s Rock",
+    "album": "Live from Earth",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Powerful / Empowering"
+  },
+  {
+    "title": "Walk Like an Egyptian",
+    "artist": "The Bangles",
+    "category": "80s Pop",
+    "album": "Different Light",
+    "release_year": 1986,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Fun / Playful"
+  },
+  {
+    "title": "Separate Ways (Worlds Apart)",
+    "artist": "Journey",
+    "category": "Arena Rock",
+    "album": "Frontiers",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Epic / Emotional"
+  },
+  {
+    "title": "Cold As Ice",
+    "artist": "Foreigner",
+    "category": "Classic Rock",
+    "album": "Foreigner",
+    "release_year": 1977,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Cool / Confident"
+  },
+  {
+    "title": "Round and Round",
+    "artist": "Ratt",
+    "category": "Glam Metal",
+    "album": "Out of the Cellar",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Energetic / Fierce"
+  },
+  {
+    "title": "Talking in Your Sleep",
+    "artist": "The Romantics",
+    "category": "New Wave",
+    "album": "In Heat",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Dreamy / Mysterious"
+  },
+  {
+    "title": "Wake Me Up Before You Go-Go",
+    "artist": "Wham!",
+    "category": "80s Pop",
+    "album": "Make It Big",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Joyful / Energetic"
+  },
+  {
+    "title": "Dancing With Myself",
+    "artist": "Billy Idol",
+    "category": "New Wave Rock",
+    "album": "Don't Stop",
+    "release_year": 1981,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Confident / Rebellious"
+  },
+  {
+    "title": "Twist of Fate",
+    "artist": "Olivia Newton-John",
+    "category": "80s Pop",
+    "album": "Two of a Kind (Soundtrack)",
+    "release_year": 1983,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Romantic / Hopeful"
+  },
+  {
+    "title": "She's Got You",
+    "artist": "Patsy Cline",
+    "category": "Classic Ballad",
+    "album": "Sentimentally Yours",
+    "release_year": 1962,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Melancholic / Tender"
+  },
+  {
+    "title": "Object of My Desire",
+    "artist": "Starpoint",
+    "category": "Funk / R&B",
+    "album": "Restless",
+    "release_year": 1985,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Groovy / Flirty"
+  },
+  {
+    "title": "Obsession",
+    "artist": "Animotion",
+    "category": "Synthpop",
+    "album": "Animotion",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 3",
+    "mood": "Intense / Catchy"
+  },
+  {
+    "title": "Kids in America",
+    "artist": "Kim Wilde",
+    "category": "80s Pop Rock",
+    "album": "Kim Wilde",
+    "release_year": 1981,
+    "featured_in": "Stranger Things - Season 2",
+    "mood": "Youthful / Energetic"
+  },
+  {
+    "title": "You Spin Me Round (Like a Record)",
+    "artist": "Dead or Alive",
+    "category": "Hi-NRG / Dance",
+    "album": "Youthquake",
+    "release_year": 1984,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Energetic / Danceable"
+  },
+  {
+    "title": "Back to Life",
+    "artist": "Soul II Soul",
+    "category": "R&B / Soul",
+    "album": "Club Classics Vol. One",
+    "release_year": 1989,
+    "featured_in": "Stranger Things - Season 4",
+    "mood": "Smooth / Chill"
+  }
 ]
-
