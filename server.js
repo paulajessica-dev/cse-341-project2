@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const mongodb = require('./data/database'); 
-const bodyParser = require('ody-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
