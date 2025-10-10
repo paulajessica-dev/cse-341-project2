@@ -42,7 +42,11 @@ const createSong = async (req, res) => {
         const song = {
             title: req.body.title,
             artist: req.body.artist,
-            category: req.body.category
+            category: req.body.category,
+            album: req.body.album,
+            release_year: req.body.release_year,
+            featured_in: req.body.featured_in,
+            mood: req.body.mood
         };
 
         const response = await mongodb.getDatabase().collection('songs').insertOne(song);        
@@ -71,8 +75,12 @@ const updateSong = async(req,res) => {
         const songId = new ObjectId(req.params.id);   
         const song = {
             title: req.body.title,
-            artist: req.body.artist,    
-            category: req.body.category
+            artist: req.body.artist,
+            category: req.body.category,
+            album: req.body.album,
+            release_year: req.body.release_year,
+            featured_in: req.body.featured_in,
+            mood: req.body.mood
         };
         const response = await mongodb.getDatabase().collection('songs').replaceOne({ _id: songId }, song);
         if (response.modifiedCount > 0) {
