@@ -4,12 +4,12 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated() || req.session.user) {
-    return next();
-  }
-  return res.status(403).send('You do not have access.');
-}
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated() || req.session.user) {
+//     return next();
+//   }
+//   return res.status(403).send('You do not have access.');
+// }
 
 
 router.get('/swagger.json', (req, res) => {
